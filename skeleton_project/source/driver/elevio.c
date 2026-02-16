@@ -44,15 +44,15 @@ void elevio_init(void){
 
 
 
-void elevio_motorDirection(MotorDirection dirn){
+void elevio_motorDirection(MotorDirection dirn){ //Tells the elevator the desired direction
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]){1, dirn}, 4, 0);
     pthread_mutex_unlock(&sockmtx);
 }
 
 
-void elevio_buttonLamp(int floor, ButtonType button, int value){
-    assert(floor >= 0);
+void elevio_buttonLamp(int floor, ButtonType button, int value){ //Decides whether or not a button lamp
+    assert(floor >= 0);                                          //should be alight
     assert(floor < N_FLOORS);
     assert(button >= 0);
     assert(button < N_BUTTONS);
@@ -63,7 +63,7 @@ void elevio_buttonLamp(int floor, ButtonType button, int value){
 }
 
 
-void elevio_floorIndicator(int floor){
+void elevio_floorIndicator(int floor){             //Decides which floor light is on
     assert(floor >= 0);
     assert(floor < N_FLOORS);
 
@@ -73,14 +73,14 @@ void elevio_floorIndicator(int floor){
 }
 
 
-void elevio_doorOpenLamp(int value){
+void elevio_doorOpenLamp(int value){              //Decides whether or not the door open lamp is lit
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]){4, value}, 4, 0);
     pthread_mutex_unlock(&sockmtx);
 }
 
 
-void elevio_stopLamp(int value){
+void elevio_stopLamp(int value){          //Decides whether or not the  StopLamp is lit
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]){5, value}, 4, 0);
     pthread_mutex_unlock(&sockmtx);
@@ -89,7 +89,7 @@ void elevio_stopLamp(int value){
 
 
 
-int elevio_callButton(int floor, ButtonType button){
+int elevio_callButton(int floor, ButtonType button){     //Checks if a call button is being pressed
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]){6, button, floor}, 4, 0);
     char buf[4];
@@ -99,7 +99,7 @@ int elevio_callButton(int floor, ButtonType button){
 }
 
 
-int elevio_floorSensor(void){
+int elevio_floorSensor(void){                //Returns current floor, (or lack of floor)
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]){7}, 4, 0);
     char buf[4];
@@ -109,7 +109,7 @@ int elevio_floorSensor(void){
 }
 
 
-int elevio_stopButton(void){
+int elevio_stopButton(void){              //Returns if the Stop button is pressed
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]){8}, 4, 0);
     char buf[4];
@@ -119,7 +119,7 @@ int elevio_stopButton(void){
 }
 
 
-int elevio_obstruction(void){
+int elevio_obstruction(void){              //Checks if the Door is obstructed
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]){9}, 4, 0);
     char buf[4];
