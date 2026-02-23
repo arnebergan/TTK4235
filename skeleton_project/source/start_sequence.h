@@ -1,0 +1,1 @@
+void start_sequence(int *floor_sensor);

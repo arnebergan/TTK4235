@@ -8,6 +8,23 @@
 
 int main(){
     elevio_init();
+    int g_stop_button= 0;
+    int g_floor = elevio_floorSensor();
+    int g_obstruction = 0;
+    int g_order_buttons[12] = {0}; //Ned, Opp, Cab
+    int g_queue[4]={0};
+    int g_motor_direction = 0;
+    int g_obstruction = 0;
+
+    int *p_g_stop_buttons = &g_stop_button;
+    int *p_g_floor = &g_floor;
+    int *p_g_obstruction = &g_obstruction;
+    int *g_order_buttons = &g_order_buttons;
+    int *g_queue = &g_queue;
+    int *g_motor_direction = &g_motor_direction;
+    int *g_door_open = &g_door_open;
+    int *g_obstruction = &g_obstruction;
+    start_sequence();
     
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
