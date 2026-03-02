@@ -13,11 +13,11 @@
 
 
 //initialisering
-void start_sequence(int *floor_sensor){
+void start_sequence(int *p_g_floor){
     elevio_init();
     elevio_motorDirection(-1);
-    while (*floor_sensor != 1){
-        *floor_sensor = elevio_floorSensor();
+    while (*p_g_floor != 1){
+        *p_g_floor = elevio_floorSensor();
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
     }
     elevio_motorDirection(0);

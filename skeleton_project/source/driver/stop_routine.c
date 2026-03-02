@@ -19,7 +19,7 @@ void stop_routine(int *g_floor, int *g_motordirection, int *g_order_buttons, int
             *g_motordirection=0;
             elevio_motorDirection(0);
             elevio_doorOpenLamp(1);
-            usleep(1000000); //pauses one second, not how its gonna be implemented
+            //pauses one second, not how its gonna be implemented
             while(*g_obstruction){
                  nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
 
