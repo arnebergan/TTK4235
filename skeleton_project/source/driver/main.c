@@ -32,11 +32,11 @@ int main(){
     int *p_g_motor_direction = &g_motor_direction;
     int *p_g_door_open = &g_door_open;
     int *p_g_direction_priority = &g_direction_priority;
+
     start_sequence(p_g_floor);
-    elevio_init();
     while(1){
-        gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor);
-        set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+        //gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor);
+        //set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
     }
     

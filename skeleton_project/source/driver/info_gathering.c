@@ -15,6 +15,9 @@ void check_stop_button(int *p_g_stop_button){
 
 void check_order_buttons(int *p_g_order_buttons){
     for(int i=0; i<12; i++){
+        if(i==1 || i==9){
+            continue;
+        }
         int floor=(1+(i/3));        //Heiltalsdivisjon
         int button_type= (i%3);
         *(p_g_order_buttons+i)=elevio_callButton(floor, button_type);
@@ -22,7 +25,7 @@ void check_order_buttons(int *p_g_order_buttons){
 }
 
 void check_floor(int *p_g_floor){
-    *p_g_floor = elevio_floorSensor();
+    *p_g_floor = (elevio_floorSensor()+1);
 }
 
 void gather_info(int *p_g_stop_button, int *p_g_order_buttons, int *p_g_floor){
