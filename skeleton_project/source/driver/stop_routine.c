@@ -13,8 +13,8 @@ void stop_routine(int *g_floor, int *g_motordirection, int *g_order_buttons, int
         while(*g_obstuction){
             usleep(10000);
         }
-        for(int i=1; i<4; i++){
-            *(g_order_buttons-i)=0;
+        for(int i=0; i<3; i++){  //Sets order buttons for current floor equal to 0
+            *(g_order_buttons+(*g_floor*3-3)+i)=0;
         }
         elevio_doorOpenLamp(0);
     };

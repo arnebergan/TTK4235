@@ -14,18 +14,19 @@ int main(){
     int g_order_buttons[12] = {0}; //Ned, Opp, Cab
     int g_queue[4]={0};
     int g_motor_direction = 0;
+    int g_door_open = 0;
     int g_obstruction = 0;
     int g_direction_priority = 1;
 
-    int *p_g_stop_buttons = &g_stop_button;
+    int *p_g_stop_button = &g_stop_button;
     int *p_g_floor = &g_floor;
     int *p_g_obstruction = &g_obstruction;
-    int *g_order_buttons = &g_order_buttons;
-    int *g_queue = &g_queue;
-    int *g_motor_direction = &g_motor_direction;
-    int *g_door_open = &g_door_open;
-    int *g_obstruction = &g_obstruction;
-    int *g_direction_priority = &g_direction_priority;
+    int *p_g_order_buttons = &g_order_buttons;
+    int *p_g_queue = &g_queue;
+    int *p_g_motor_direction = &g_motor_direction;
+    int *p_g_door_open = &g_door_open;
+    int *p_g_obstruction = &g_obstruction;
+    int *p_g_direction_priority = &g_direction_priority;
     start_sequence();
     
     printf("=== Example Program ===\n");
