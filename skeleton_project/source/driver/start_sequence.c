@@ -7,6 +7,8 @@
 #include "start_sequence.h"
 #include "stop_button.h"
 #include "stop_routine.h"
+#include "lights.h"
+
 
 //initialisering
 void start_sequence(int *floor_sensor){

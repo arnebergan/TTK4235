@@ -7,9 +7,10 @@
 #include "start_sequence.h"
 #include "stop_button.h"
 #include "stop_routine.h"
+#include "lights.h"
 
 void check_stop_button(int *p_g_stop_button){
-    *p_g_stop_button = elevio_stopButton;
+    *p_g_stop_button = elevio_stopButton();
 }
 
 void check_order_buttons(int *p_g_order_buttons){

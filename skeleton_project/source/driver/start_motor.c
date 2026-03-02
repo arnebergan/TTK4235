@@ -7,6 +7,8 @@
 #include "start_sequence.h"
 #include "stop_button.h"
 #include "stop_routine.h"
+#include "lights.h"
+
 
 //Can make 2 functions check over and check under, if that improves readability
 

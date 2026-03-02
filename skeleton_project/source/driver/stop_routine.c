@@ -7,6 +7,8 @@
 #include "start_sequence.h"
 #include "stop_button.h"
 #include "stop_routine.h"
+#include "lights.h"
+
 
 void stop_routine(int *g_floor, int *g_motordirection, int *g_order_buttons, int *g_obstruction){
     if(*g_floor!=-1){    
