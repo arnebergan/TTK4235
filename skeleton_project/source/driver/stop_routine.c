@@ -1,5 +1,8 @@
 #pragma once
 
+#include <time.h>
+
+
 #include "elevio.h"
 #include "con_load.h"
 #include "info_gathering.h"
@@ -18,7 +21,8 @@ void stop_routine(int *g_floor, int *g_motordirection, int *g_order_buttons, int
             elevio_doorOpenLamp(1);
             usleep(1000000); //pauses one second, not how its gonna be implemented
             while(*g_obstruction){
-                usleep(10000);
+                 nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
+
             }
             for(int i=0; i<3; i++){  //Sets order buttons for current floor equal to 0
                 *(g_order_buttons+(*g_floor*3-3)+i)=0;

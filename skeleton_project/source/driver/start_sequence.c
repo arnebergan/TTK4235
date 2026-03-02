@@ -1,5 +1,7 @@
 #pragma once
 
+#include <time.h>
+
 #include "elevio.h"
 #include "con_load.h"
 #include "info_gathering.h"
@@ -16,7 +18,7 @@ void start_sequence(int *floor_sensor){
     elevio_motorDirection(-1);
     while (*floor_sensor != 1){
         *floor_sensor = elevio_floorSensor();
-        usleep(10000);
+        nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
     }
     elevio_motorDirection(0);
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <time.h>
+
 #include "elevio.h"
 #include "con_load.h"
 #include "info_gathering.h"
@@ -23,7 +25,7 @@ void stop_button(int *p_g_stop_button, int *p_g_motordirection, int *p_g_door_op
         //Function update lights
         while(*p_g_stop_button){
             check_stop_button(p_g_stop_button);
-            usleep(20000);
+            nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
         }
         *p_g_door_open=0;
     }
