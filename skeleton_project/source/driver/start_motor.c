@@ -1,3 +1,13 @@
+#pragma once
+
+#include "elevio.h"
+#include "con_load.h"
+#include "info_gathering.h"
+#include "start_motor.h"
+#include "start_sequence.h"
+#include "stop_button.h"
+#include "stop_routine.h"
+
 //Can make 2 functions check over and check under, if that improves readability
 
 void drive_elevator(int *p_g_direction_piority, int *p_g_order_buttons, int *p_g_floor, int *g_motor_direction, int *p_g_motor_direction){

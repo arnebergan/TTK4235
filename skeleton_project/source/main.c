@@ -11,7 +11,7 @@ int main(){
     int g_stop_button= 0;
     int g_floor = elevio_floorSensor();
     int g_obstruction = 0;
-    int g_order_buttons[12] = {0}; //Ned, Opp, Cab
+    int g_order_buttons[12] = {0}; // Opp, Ned, Cab
     int g_queue[4]={0};
     int g_motor_direction = 0;
     int g_door_open = 0;

@@ -1,8 +1,12 @@
 #pragma once
 
-#include "start_sequence.h"
 #include "elevio.h"
 #include "con_load.h"
+#include "info_gathering.h"
+#include "start_motor.h"
+#include "start_sequence.h"
+#include "stop_button.h"
+#include "stop_routine.h"
 
 //initialisering
 void start_sequence(int *floor_sensor){
