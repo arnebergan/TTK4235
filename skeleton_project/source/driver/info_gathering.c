@@ -18,7 +18,7 @@ void check_order_buttons(int *p_g_order_buttons){
         if(i==1 || i==9){
             continue;
         }
-        int floor=(1+(i/3));        //Heiltalsdivisjon
+        int floor=((i/3));        //Heiltalsdivisjon
         int button_type= (i%3);
         *(p_g_order_buttons+i)=elevio_callButton(floor, button_type);
     }

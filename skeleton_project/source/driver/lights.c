@@ -19,7 +19,7 @@ void order_button_lights(int *p_g_order_buttons){
         if(i==1 || i==9){
             continue;
         }
-        int floor=(1+(i/3));        //Heiltalsdivisjon
+        int floor=((i/3));        //Heiltalsdivisjon
         int button_type= (i%3);
         elevio_buttonLamp(floor, button_type, *p_g_order_buttons);
     }
