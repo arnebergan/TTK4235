@@ -4,6 +4,13 @@
 
 #include "elevio.h"
 #include "con_load.h"
+#include "info_gathering.h"
+#include "start_motor.h"
+#include "start_sequence.h"
+#include "stop_button.h"
+#include "stop_routine.h"
+#include "lights.h"
+
 
 //initialisering
 void start_sequence(int *p_g_floor){
