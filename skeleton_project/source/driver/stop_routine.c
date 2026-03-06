@@ -1,0 +1,51 @@
+#pragma once
+
+#include <time.h>
+
+
+#include "elevio.h"
+#include "con_load.h"
+#include "info_gathering.h"
+#include "start_motor.h"
+#include "start_sequence.h"
+#include "stop_button.h"
+#include "stop_routine.h"
+#include "lights.h"
+
+
+void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_buttons, int *p_g_obstruction){
+    if(*p_g_floor!=-1 & *p_g_motordirection!=0){
+        int no_orders_further =1;
+        if(*p_g_motordirection==1){
+            for(int i=((*p_g_floor)*3+3); i<12; i++){
+                if (*(p_g_order_buttons+i)){
+                    no_orders_further=0;                   
+                }
+            }
+        }
+        if(*p_g_motordirection==-1){
+            for(int i=((*p_g_floor)*3-1); i>-1; i--){ 
+                if (*(p_g_order_buttons+i)){
+                    no_orders_further=0;
+                }
+            }
+        }
+        if (*(p_g_order_buttons+(*p_g_floor*3+2)) || (*(p_g_order_buttons+(*p_g_floor*3))==*p_g_motordirection) || (*(p_g_order_buttons+(*p_g_floor*3+1))==-*p_g_motordirection) || no_orders_further){
+            *p_g_motordirection=0;
+            elevio_motorDirection(0);
+            elevio_doorOpenLamp(1);
+            nanosleep(&(struct timespec){0, 500*1000*1000}, NULL); //Pauses 1 second
+            *p_g_obstruction=elevio_obstruction();
+            while(*p_g_obstruction){
+                *p_g_obstruction=elevio_obstruction();
+                nanosleep(&(struct timespec){0, 20*1000*1000}, NULL); //Need to add gather info here
+            }
+            for(int i=0; i<3; i++){  //Sets order buttons for current floor equal to 0
+                *(p_g_order_buttons+(*p_g_floor*3)+i)=0;
+            }
+            elevio_doorOpenLamp(0);
+        };
+    };
+};
+
+
