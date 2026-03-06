@@ -14,8 +14,8 @@
 
 
 void stop_routine(int *g_floor, int *g_motordirection, int *g_order_buttons, int *g_obstruction){
-    if(*g_floor!=0){    
-        if (*(g_order_buttons+(*g_floor*3-1)) || (*(g_order_buttons+(*g_floor*3-3))==*g_motordirection) || (*(g_order_buttons+(*g_floor*3-2))==-*g_motordirection)){
+    if(*g_floor!=-1){    
+        if (*(g_order_buttons+(*g_floor*3)) || (*(g_order_buttons+(*g_floor*3+2))==*g_motordirection) || (*(g_order_buttons+(*g_floor*3+1))==-*g_motordirection)){
             *g_motordirection=0;
             elevio_motorDirection(0);
             elevio_doorOpenLamp(1);

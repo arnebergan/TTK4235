@@ -35,8 +35,8 @@ int main(){
 
     start_sequence(p_g_floor);
     while(1){
-        //gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor);
-        //set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+        gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor);
+        set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
     }
     

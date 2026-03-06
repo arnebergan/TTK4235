@@ -22,7 +22,7 @@ void stop_button(int *p_g_stop_button, int *p_g_motordirection, int *p_g_door_op
         for(int i=0; i<12; i++){
             *(p_g_order_buttons+i)=0;
         }
-        void set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+        void set_lights(int *p_g_stop_button, int *p_g_order_buttons, int *p_g_floor);
         while(*p_g_stop_button){
             check_stop_button(p_g_stop_button);
             nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
