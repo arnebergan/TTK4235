@@ -16,7 +16,7 @@ void stop_button(int *p_g_stop_button, int *p_g_motor_direction, int *p_g_door_o
     if (*p_g_stop_button){
         *p_g_motor_direction=0;
         elevio_motorDirection(0);
-        if(*p_g_floor != 0){    //Need to find out the value of p_g_floor when between floor, visstnok -1
+        if(*p_g_floor != -1){    //Need to find out the value of p_g_floor when between floor, visstnok -1
             *p_g_door_open=1;
         }
         for(int i=0; i<12; i++){

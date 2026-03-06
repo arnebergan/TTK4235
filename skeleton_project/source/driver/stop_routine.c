@@ -13,7 +13,7 @@
 #include "lights.h"
 
 
-void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_buttons, int *p_g_obstruction){
+void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_buttons, int *p_g_obstruction, int*p_g_stop_button, int *p_g_last_floor){
     if(*p_g_floor!=-1 & *p_g_motordirection!=0){
         int no_orders_further =1;
         if(*p_g_motordirection==1){
@@ -38,7 +38,9 @@ void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_button
             *p_g_obstruction=elevio_obstruction();
             while(*p_g_obstruction){
                 *p_g_obstruction=elevio_obstruction();
-                nanosleep(&(struct timespec){0, 20*1000*1000}, NULL); //Need to add gather info here
+                gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor); //Gathering the info, and it works
+                set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);  //Problem is that the light doesent work untill after obstruction
+                nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);           //FIXED^^^^^^^
             }
             for(int i=0; i<3; i++){  //Sets order buttons for current floor equal to 0
                 *(p_g_order_buttons+(*p_g_floor*3)+i)=0;

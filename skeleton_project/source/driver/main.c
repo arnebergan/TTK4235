@@ -40,7 +40,7 @@ int main(){
         set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
         drive_elevator(p_g_direction_priority, p_g_order_buttons, p_g_floor, p_g_motor_direction);
         drive_after_stop(p_g_direction_priority, p_g_order_buttons, p_g_floor, p_g_motor_direction, p_g_last_floor);
-        stop_routine(p_g_floor, p_g_motor_direction, p_g_order_buttons, p_g_obstruction);
+        stop_routine(p_g_floor, p_g_motor_direction, p_g_order_buttons, p_g_obstruction, p_g_stop_button, p_g_last_floor);
         stop_button(p_g_stop_button, p_g_motor_direction, p_g_door_open, p_g_order_buttons, p_g_floor);
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
 
