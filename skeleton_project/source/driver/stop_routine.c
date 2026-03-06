@@ -1,6 +1,7 @@
 #pragma once
 
 #include <time.h>
+#include <stdio.h>
 
 
 #include "elevio.h"
@@ -13,7 +14,7 @@
 #include "lights.h"
 
 
-void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_buttons, int *p_g_obstruction, int*p_g_stop_button, int *p_g_last_floor){
+void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_buttons, int *p_g_obstruction, int*p_g_stop_button, int *p_g_last_floor, int* p_g_motor_direction, int *p_g_door_open){
     if(*p_g_floor!=-1 & *p_g_motordirection!=0){
         int no_orders_further =1;
         if(*p_g_motordirection==1){
@@ -34,7 +35,17 @@ void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_button
             *p_g_motordirection=0;
             elevio_motorDirection(0);
             elevio_doorOpenLamp(1);
+            time_t start_timer = time(NULL);
+            while (start_timer <=3){
+                printf("start_timer: %ld", start_timer);
+                gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor);
+                set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+                stop_button(p_g_stop_button, p_g_motor_direction, p_g_door_open, p_g_order_buttons, p_g_floor);
+                
+            }
             nanosleep(&(struct timespec){0, 500*1000*1000}, NULL); //Pauses 1 second
+ 
+ 
             *p_g_obstruction=elevio_obstruction();
             while(*p_g_obstruction){
                 *p_g_obstruction=elevio_obstruction();
