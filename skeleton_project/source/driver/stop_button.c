@@ -41,19 +41,11 @@ void stop_button(int *p_g_stop_button, int *p_g_motor_direction, int *p_g_door_o
                     set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
                     door_timer = time(NULL);
                 }
-            }
-        }
-        *p_g_obstruction=elevio_obstruction();
-        time_t obstruction_timer = time(NULL);
-        if(*p_g_obstruction){
-            while ((time(NULL)-obstruction_timer)<3){
-                gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor);
-                set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
-                stop_button(p_g_stop_button, p_g_motor_direction, p_g_door_open, p_g_order_buttons, p_g_floor, p_g_last_floor, p_g_obstruction);
                 *p_g_obstruction=elevio_obstruction();
                 if(*p_g_obstruction){
-                    obstruction_timer = time(NULL);
+                    door_timer = time(NULL);
                 }
+
             }
         }
         *p_g_door_open=0;
