@@ -39,17 +39,21 @@ void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_button
             while ((time(NULL)-start_timer)<3){
                 gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor);
                 set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
-                stop_button(p_g_stop_button, p_g_motor_direction, p_g_door_open, p_g_order_buttons, p_g_floor);
+                stop_button(p_g_stop_button, p_g_motor_direction, p_g_door_open, p_g_order_buttons, p_g_floor, p_g_last_floor, p_g_obstruction);
                 
             }
 
- 
-            *p_g_obstruction=elevio_obstruction();
-            while(*p_g_obstruction){
-                *p_g_obstruction=elevio_obstruction();
-                gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor); //Gathering the info, and it works
-                set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);  //Problem is that the light doesent work untill after obstruction
-                nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);           //FIXED^^^^^^^
+            time_t obstruction_timer = time(NULL);
+            if(*p_g_obstruction){
+                while ((time(NULL)-obstruction_timer)<3){
+                    gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor);
+                    set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+                    stop_button(p_g_stop_button, p_g_motor_direction, p_g_door_open, p_g_order_buttons, p_g_floor, p_g_last_floor, p_g_obstruction);
+                    *p_g_obstruction=elevio_obstruction();
+                    if(*p_g_obstruction){
+                        obstruction_timer = time(NULL);
+                    }
+                }
             }
             for(int i=0; i<3; i++){  //Sets order buttons for current floor equal to 0
                 *(p_g_order_buttons+(*p_g_floor*3)+i)=0;

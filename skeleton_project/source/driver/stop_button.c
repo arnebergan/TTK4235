@@ -12,7 +12,7 @@
 #include "lights.h"
 
 
-void stop_button(int *p_g_stop_button, int *p_g_motor_direction, int *p_g_door_open, int *p_g_order_buttons, int *p_g_floor){
+void stop_button(int *p_g_stop_button, int *p_g_motor_direction, int *p_g_door_open, int *p_g_order_buttons, int *p_g_floor, int *p_g_last_floor, int *p_g_obstruction){
     if (*p_g_stop_button){
         *p_g_motor_direction=0;
         elevio_motorDirection(0);
@@ -27,6 +27,34 @@ void stop_button(int *p_g_stop_button, int *p_g_motor_direction, int *p_g_door_o
         while(*p_g_stop_button){
             check_stop_button(p_g_stop_button);
             nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
+        }
+        if(*p_g_door_open){
+            time_t door_timer = time(NULL);
+            while ((time(NULL)-door_timer)<3){
+                gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor);
+                set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+                check_stop_button(p_g_stop_button);
+                if(*p_g_stop_button){
+                    for(int i=0; i<12; i++){
+                        *(p_g_order_buttons+i)=0;
+                    }
+                    set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+                    door_timer = time(NULL);
+                }
+            }
+        }
+        *p_g_obstruction=elevio_obstruction();
+        time_t obstruction_timer = time(NULL);
+        if(*p_g_obstruction){
+            while ((time(NULL)-obstruction_timer)<3){
+                gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor);
+                set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
+                stop_button(p_g_stop_button, p_g_motor_direction, p_g_door_open, p_g_order_buttons, p_g_floor, p_g_last_floor, p_g_obstruction);
+                *p_g_obstruction=elevio_obstruction();
+                if(*p_g_obstruction){
+                    obstruction_timer = time(NULL);
+                }
+            }
         }
         *p_g_door_open=0;
         elevio_doorOpenLamp(*p_g_door_open);
