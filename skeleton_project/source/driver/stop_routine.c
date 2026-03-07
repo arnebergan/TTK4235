@@ -36,7 +36,7 @@ void stop_routine(int *p_g_floor, int *p_g_motordirection, int *p_g_order_button
             elevio_motorDirection(0);
             elevio_doorOpenLamp(1);
             time_t start_timer = time(NULL);
-            while (start_timer <=3){
+            while (time(NULL)-start_timer<3){
                 printf("start_timer: %ld", start_timer);
                 gather_info(p_g_stop_button, p_g_order_buttons, p_g_floor, p_g_last_floor);
                 set_lights(p_g_stop_button, p_g_order_buttons, p_g_floor);
